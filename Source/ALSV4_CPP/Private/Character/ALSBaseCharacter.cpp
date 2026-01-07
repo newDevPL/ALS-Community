@@ -499,21 +499,6 @@ void AALSBaseCharacter::SetMovementModel()
 		MovementModel.DataTable->FindRow<FALSMovementStateSettings>(MovementModel.RowName, ContextString);
 	check(OutRow);
 	MovementData = *OutRow;
-
-	// Slow down the run/sprint speeds globally for a heavier feel.
-	constexpr float RunSpeedScale = 0.8f;
-	auto ScaleMovementSettings = [RunSpeedScale](FALSMovementSettings& Settings)
-	{
-		Settings.RunSpeed *= RunSpeedScale;
-		Settings.SprintSpeed *= RunSpeedScale;
-	};
-
-	ScaleMovementSettings(MovementData.VelocityDirection.Standing);
-	ScaleMovementSettings(MovementData.VelocityDirection.Crouching);
-	ScaleMovementSettings(MovementData.LookingDirection.Standing);
-	ScaleMovementSettings(MovementData.LookingDirection.Crouching);
-	ScaleMovementSettings(MovementData.Aiming.Standing);
-	ScaleMovementSettings(MovementData.Aiming.Crouching);
 }
 
 void AALSBaseCharacter::ForceUpdateCharacterState()
@@ -1016,13 +1001,6 @@ void AALSBaseCharacter::SetEssentialValues(float DeltaTime)
 
 void AALSBaseCharacter::UpdateCharacterMovement()
 {
-	// Enforce walk/run-only gait based on sprint input.
-	const EALSGait TargetGait = bSprintHeld ? EALSGait::Running : EALSGait::Walking;
-	if (DesiredGait != TargetGait)
-	{
-		SetDesiredGait(TargetGait);
-	}
-
 	// Set the Allowed Gait
 	const EALSGait AllowedGait = GetAllowedGait();
 
@@ -1292,14 +1270,14 @@ void AALSBaseCharacter::JumpAction_Implementation(bool bValue)
 
 void AALSBaseCharacter::SprintAction_Implementation(bool bValue)
 {
-	bSprintHeld = bValue;
-
-	if (GetLocalRole() == ROLE_AutonomousProxy)
+	if (bValue)
 	{
-		Server_SetSprintHeld(bSprintHeld);
+		SetDesiredGait(EALSGait::Sprinting);
 	}
-
-	SetDesiredGait(bSprintHeld ? EALSGait::Running : EALSGait::Walking);
+	else
+	{
+		SetDesiredGait(EALSGait::Running);
+	}
 }
 
 void AALSBaseCharacter::AimAction_Implementation(bool bValue)
@@ -1397,12 +1375,14 @@ void AALSBaseCharacter::StanceAction_Implementation()
 
 void AALSBaseCharacter::WalkAction_Implementation()
 {
-	// Disabled: we only use walk/run based on sprint input.
-}
-
-void AALSBaseCharacter::Server_SetSprintHeld_Implementation(bool bNewSprintHeld)
-{
-	bSprintHeld = bNewSprintHeld;
+	if (DesiredGait == EALSGait::Walking)
+	{
+		SetDesiredGait(EALSGait::Running);
+	}
+	else if (DesiredGait == EALSGait::Running)
+	{
+		SetDesiredGait(EALSGait::Walking);
+	}
 }
 
 void AALSBaseCharacter::RagdollAction_Implementation()

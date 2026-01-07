@@ -198,11 +198,7 @@ void UALSDebugComponent::ToggleDebugMesh()
 	}
 	else
 	{
-#if ENGINE_MINOR_VERSION > 0
 		DefaultSkeletalMesh = OwnerCharacter->GetMesh()->GetSkeletalMeshAsset();
-#else
-		DefaultSkeletalMesh = OwnerCharacter->GetMesh()->SkeletalMesh;
-#endif
 		OwnerCharacter->SetVisibleMesh(DebugSkeletalMesh);
 	}
 	bDebugMeshVisible = !bDebugMeshVisible;

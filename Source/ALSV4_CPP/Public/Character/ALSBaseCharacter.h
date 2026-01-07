@@ -338,9 +338,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ALS|Input")
 	void WalkAction();
 
-	UFUNCTION(BlueprintCallable, Server, Reliable, Category = "ALS|Input")
-	void Server_SetSprintHeld(bool bNewSprintHeld);
-
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ALS|Input")
 	void RagdollAction();
 
@@ -431,7 +428,7 @@ protected:
 	EALSRotationMode DesiredRotationMode = EALSRotationMode::LookingDirection;
 
 	UPROPERTY(EditAnywhere, Replicated, BlueprintReadWrite, Category = "ALS|Input")
-	EALSGait DesiredGait = EALSGait::Walking;
+	EALSGait DesiredGait = EALSGait::Running;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "ALS|Input")
 	EALSStance DesiredStance = EALSStance::Standing;
