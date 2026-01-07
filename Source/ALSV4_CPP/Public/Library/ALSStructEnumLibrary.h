@@ -320,6 +320,24 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
 	bool Barrel_ = false;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool Fists_ = false;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool Baseball_ = false;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool Knife_ = false;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool RifleHip_ = false;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool RPG_ = false;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true), Category = "ALS|Character States")
+	bool Thrown_ = false;
+
 public:
 	FALSOverlayState()
 	{
@@ -340,6 +358,12 @@ public:
 	const bool& Binoculars() const { return Binoculars_; }
 	const bool& Box() const { return Box_; }
 	const bool& Barrel() const { return Barrel_; }
+	const bool& Fists() const { return Fists_; }
+	const bool& Baseball() const { return Baseball_; }
+	const bool& Knife() const { return Knife_; }
+	const bool& RifleHip() const { return RifleHip_; }
+	const bool& RPG() const { return RPG_; }
+	const bool& Thrown() const { return Thrown_; }
 
 	operator EALSOverlayState() const { return State; }
 
@@ -359,6 +383,12 @@ public:
 		Binoculars_ = State == EALSOverlayState::Binoculars;
 		Box_ = State == EALSOverlayState::Box;
 		Barrel_ = State == EALSOverlayState::Barrel;
+		Fists_ = State == EALSOverlayState::Fists;
+		Baseball_ = State == EALSOverlayState::Baseball;
+		Knife_ = State == EALSOverlayState::Knife;
+		RifleHip_ = State == EALSOverlayState::RifleHip;
+		RPG_ = State == EALSOverlayState::RPG;
+		Thrown_ = State == EALSOverlayState::Thrown;
 	}
 };
 

@@ -338,6 +338,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ALS|Input")
 	void WalkAction();
 
+	UFUNCTION(BlueprintCallable, Server, Reliable, Category = "ALS|Input")
+	void Server_SetSprintHeld(bool bNewSprintHeld);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ALS|Input")
 	void RagdollAction();
 
@@ -415,7 +418,7 @@ protected:
 	void OnRep_OverlayState(EALSOverlayState PrevOverlayState);
 
 	UFUNCTION(Category = "ALS|Replication")
-	void OnRep_VisibleMesh(USkeletalMesh* NewVisibleMesh);
+	void OnRep_VisibleMesh(const USkeletalMesh* PreviousSkeletalMesh);
 
 protected:
 	/* Custom movement component*/
@@ -428,7 +431,7 @@ protected:
 	EALSRotationMode DesiredRotationMode = EALSRotationMode::LookingDirection;
 
 	UPROPERTY(EditAnywhere, Replicated, BlueprintReadWrite, Category = "ALS|Input")
-	EALSGait DesiredGait = EALSGait::Running;
+	EALSGait DesiredGait = EALSGait::Walking;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "ALS|Input")
 	EALSStance DesiredStance = EALSStance::Standing;

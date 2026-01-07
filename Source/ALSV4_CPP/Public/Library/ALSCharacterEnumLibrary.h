@@ -76,7 +76,13 @@ enum class EALSOverlayState : uint8
 	Torch,
 	Binoculars,
 	Box,
-	Barrel
+	Barrel,
+	Fists,
+	Baseball,
+	Knife,
+	RifleHip,
+	RPG,
+	Thrown
 };
 
 /**
