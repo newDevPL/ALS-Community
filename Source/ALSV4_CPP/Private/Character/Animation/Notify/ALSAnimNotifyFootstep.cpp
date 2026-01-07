@@ -4,17 +4,13 @@
 
 #include "Character/Animation/Notify/ALSAnimNotifyFootstep.h"
 
-#include "Animation/AnimInstance.h"
 #include "Components/AudioComponent.h"
-#include "Components/SkeletalMeshComponent.h"
-
 #include "Engine/DataTable.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Library/ALSCharacterStructLibrary.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
-#include "Sound/SoundBase.h"
 
 
 const FName NAME_Mask_FootstepSound(TEXT("Mask_FootstepSound"));

@@ -4,8 +4,7 @@
 
 #include "Character/ALSPlayerCameraManager.h"
 
-#include "Engine/World.h"
-#include "Components/SkeletalMeshComponent.h"
+
 #include "Character/ALSBaseCharacter.h"
 #include "Character/ALSPlayerController.h"
 #include "Character/Animation/ALSPlayerCameraBehavior.h"

@@ -75,7 +75,7 @@ struct FALSTurnInPlaceAsset
 	float AnimatedAngle = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ALS|Turn In Place")
-	FName SlotName = NAME_None;
+	FName SlotName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ALS|Turn In Place")
 	float PlayRate = 1.0f;
@@ -90,22 +90,22 @@ struct FALSAnimCharacterInformation
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FRotator AimingRotation = FRotator::ZeroRotator;
+	FRotator AimingRotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FRotator CharacterActorRotation = FRotator::ZeroRotator;
+	FRotator CharacterActorRotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FVector Velocity = FVector::ZeroVector;
+	FVector Velocity;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FVector RelativeVelocityDirection = FVector::ZeroVector;
+	FVector RelativeVelocityDirection;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FVector Acceleration = FVector::ZeroVector;
+	FVector Acceleration;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
-	FVector MovementInput = FVector::ZeroVector;
+	FVector MovementInput;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Character Information")
 	bool bIsMoving = false;
@@ -210,13 +210,13 @@ struct FALSAnimGraphAimingValues
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Aiming Values")
-	FRotator SmoothedAimingRotation = FRotator::ZeroRotator;
+	FRotator SmoothedAimingRotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Aiming Values")
-	FRotator SpineRotation = FRotator::ZeroRotator;
+	FRotator SpineRotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Aiming Values")
-	FVector2D AimingAngle = FVector2D::ZeroVector;
+	FVector2D AimingAngle;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Aiming Values")
 	float AimSweepTime = 0.5f;
@@ -324,46 +324,46 @@ struct FALSAnimGraphFootIK
 	float FootLock_R_Alpha = 0.0f;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	bool UseFootLockCurve_L = false;
+	bool UseFootLockCurve_L;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	bool UseFootLockCurve_R = false;
+	bool UseFootLockCurve_R;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector FootLock_L_Location = FVector::ZeroVector;
+	FVector FootLock_L_Location;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector TargetFootLock_R_Location = FVector::ZeroVector;
+	FVector TargetFootLock_R_Location;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector FootLock_R_Location = FVector::ZeroVector;
+	FVector FootLock_R_Location;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator TargetFootLock_L_Rotation = FRotator::ZeroRotator;
+	FRotator TargetFootLock_L_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator FootLock_L_Rotation = FRotator::ZeroRotator;
+	FRotator FootLock_L_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator TargetFootLock_R_Rotation = FRotator::ZeroRotator;
+	FRotator TargetFootLock_R_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator FootLock_R_Rotation = FRotator::ZeroRotator;
+	FRotator FootLock_R_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector FootOffset_L_Location = FVector::ZeroVector;
+	FVector FootOffset_L_Location;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector FootOffset_R_Location = FVector::ZeroVector;
+	FVector FootOffset_R_Location;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator FootOffset_L_Rotation = FRotator::ZeroRotator;
+	FRotator FootOffset_L_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FRotator FootOffset_R_Rotation = FRotator::ZeroRotator;
+	FRotator FootOffset_R_Rotation;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
-	FVector PelvisOffset = FVector::ZeroVector;
+	FVector PelvisOffset;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "ALS|Anim Graph - Foot IK")
 	float PelvisAlpha = 0.0f;

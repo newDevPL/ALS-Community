@@ -514,42 +514,49 @@ void AALSBaseCharacter::ForceUpdateCharacterState()
 
 FALSMovementSettings AALSBaseCharacter::GetTargetMovementSettings() const
 {
+	const auto ApplySpeedMultipliers = [this](FALSMovementSettings Settings)
+	{
+		Settings.WalkSpeed *= WalkSpeedMultiplier;
+		Settings.SprintSpeed *= SprintSpeedMultiplier;
+		return Settings;
+	};
+
 	if (RotationMode == EALSRotationMode::VelocityDirection)
 	{
 		if (Stance == EALSStance::Standing)
 		{
-			return MovementData.VelocityDirection.Standing;
+			return ApplySpeedMultipliers(MovementData.VelocityDirection.Standing);
 		}
 		if (Stance == EALSStance::Crouching)
 		{
-			return MovementData.VelocityDirection.Crouching;
+			return ApplySpeedMultipliers(MovementData.VelocityDirection.Crouching);
 		}
 	}
 	else if (RotationMode == EALSRotationMode::LookingDirection)
 	{
 		if (Stance == EALSStance::Standing)
 		{
-			return MovementData.LookingDirection.Standing;
+			return ApplySpeedMultipliers(MovementData.LookingDirection.Standing);
 		}
 		if (Stance == EALSStance::Crouching)
 		{
-			return MovementData.LookingDirection.Crouching;
+			return ApplySpeedMultipliers(MovementData.LookingDirection.Crouching);
 		}
 	}
 	else if (RotationMode == EALSRotationMode::Aiming)
 	{
 		if (Stance == EALSStance::Standing)
 		{
-			return MovementData.Aiming.Standing;
+			return ApplySpeedMultipliers(MovementData.Aiming.Standing);
 		}
 		if (Stance == EALSStance::Crouching)
 		{
-			return MovementData.Aiming.Crouching;
+			return ApplySpeedMultipliers(MovementData.Aiming.Crouching);
 		}
 	}
 
 	// Default to velocity dir standing
-	return MovementData.VelocityDirection.Standing;
+	return ApplySpeedMultipliers(MovementData.VelocityDirection.Standing);
 }
 
 bool AALSBaseCharacter::CanSprint() const
@@ -558,7 +565,7 @@ bool AALSBaseCharacter::CanSprint() const
 	// (input) rotation. If the character is in the Looking Rotation mode, only allow sprinting if there is full
 	// movement input and it is faced forward relative to the camera + or - 50 degrees.
 
-	if (!bHasMovementInput || RotationMode == EALSRotationMode::Aiming)
+	if (!bHasMovementInput)
 	{
 		return false;
 	}
@@ -1117,26 +1124,12 @@ EALSGait AALSBaseCharacter::GetAllowedGait() const
 	// and can be determined by the desired gait, the rotation mode, the stance, etc. For example,
 	// if you wanted to force the character into a walking state while indoors, this could be done here.
 
-	if (Stance == EALSStance::Standing)
+	if (DesiredGait == EALSGait::Sprinting && CanSprint())
 	{
-		if (RotationMode != EALSRotationMode::Aiming)
-		{
-			if (DesiredGait == EALSGait::Sprinting)
-			{
-				return CanSprint() ? EALSGait::Sprinting : EALSGait::Running;
-			}
-			return DesiredGait;
-		}
+		return EALSGait::Sprinting;
 	}
 
-	// Crouching stance & Aiming rot mode has same behaviour
-
-	if (DesiredGait == EALSGait::Sprinting)
-	{
-		return EALSGait::Running;
-	}
-
-	return DesiredGait;
+	return EALSGait::Walking;
 }
 
 EALSGait AALSBaseCharacter::GetActualGait(EALSGait AllowedGait) const
@@ -1276,7 +1269,7 @@ void AALSBaseCharacter::SprintAction_Implementation(bool bValue)
 	}
 	else
 	{
-		SetDesiredGait(EALSGait::Running);
+		SetDesiredGait(EALSGait::Walking);
 	}
 }
 
@@ -1375,14 +1368,7 @@ void AALSBaseCharacter::StanceAction_Implementation()
 
 void AALSBaseCharacter::WalkAction_Implementation()
 {
-	if (DesiredGait == EALSGait::Walking)
-	{
-		SetDesiredGait(EALSGait::Running);
-	}
-	else if (DesiredGait == EALSGait::Running)
-	{
-		SetDesiredGait(EALSGait::Walking);
-	}
+	// Intentionally left blank; walking is now the default gait.
 }
 
 void AALSBaseCharacter::RagdollAction_Implementation()

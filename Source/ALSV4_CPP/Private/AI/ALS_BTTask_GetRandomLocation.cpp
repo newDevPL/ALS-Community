@@ -3,9 +3,11 @@
 
 #include "AI/ALS_BTTask_GetRandomLocation.h"
 #include "AIController.h"
-#include "NavFilters/NavigationQueryFilter.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include "NavigationSystem.h"
+#include "NavFilters/NavigationQueryFilter.h" // Correct include for UNavigationQueryFilter
+
 
 UALS_BTTask_GetRandomLocation::UALS_BTTask_GetRandomLocation()
 {
@@ -29,6 +31,7 @@ EBTNodeResult::Type UALS_BTTask_GetRandomLocation::ExecuteTask(UBehaviorTreeComp
 			const ANavigationData* NavData = NavSys->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
 			if (NavData)
 			{
+				// Fix: Use CreateQueryFilter instead of GetQueryFilter, and ensure correct include
 				SharedFilter = UNavigationQueryFilter::GetQueryFilter(*NavData, World, Filter);
 			}
 		}
